@@ -4,19 +4,36 @@ let game = {
 
     board: [1 , 2 , 3, 4 , 5, 6, 7, 8, 9],  
     turnCount: 0,
-    currentPlayer: 'X'
+    currentPlayer: 'X',
+    playerOne: '',
+    playerTwo: '',
 }
 
-// function playerName() {
-//     console.log('Enter player X name')
-//     process.stdin.once('data', (userInput) => {
-//         let userName = userInput.string().trim()
-//     }
-// }
+function gatherNames() {
+    console.log('Enter player X name')
+    process.stdin.once('data', (firstUserInput) => {
+        game.playerOne = firstUserInput.toString().trim()
+            console.log('Enter player O name')
+            process.stdin.once('data', (secondUserInput) => {
+                game.playerTwo = secondUserInput.toString().trim()
+                printBoard(game.board)    
+                promptPlayer()
+            })
+        
+    });
+}
+
 
 function promptPlayer() {
     
-    console.log('Player ' + game.currentPlayer + ' choose a position')
+    let playername = ''
+    if (game.currentPlayer === 'X') {
+        playername = game.playerOne
+    } else {
+        playername = game.playerTwo
+    }
+
+    console.log('Player ' + playername + ' choose a position')
     
     process.stdin.once('data', (userInput) => {
     
@@ -50,7 +67,7 @@ function promptPlayer() {
 
             if(gameHasBeenWon){
 
-                console.log(game.currentPlayer + ' wins!')
+                console.log(playername + ' wins!')
                 process.exit()
             }
             else {
@@ -59,7 +76,7 @@ function promptPlayer() {
                     game.currentPlayer = 'O'
                 }
                 else {
-                    game.currentPlayer = "X"
+                    game.currentPlayer = 'X'
                 }
             
         
@@ -72,7 +89,7 @@ function promptPlayer() {
                     console.log('It is a Draw!!')
                     process.exit()
                 }
-        
+                
                 printBoard(game.board)
                 promptPlayer()
 
@@ -149,9 +166,9 @@ function printBoard(board) {
     console.log(` ${board[6]} | ${board[7]} | ${board[8]} `)
 }
 
-
-printBoard(game.board)
-promptPlayer();
+gatherNames()
+// // printBoard(game.board)
+// promptPlayer();
 
 
 
