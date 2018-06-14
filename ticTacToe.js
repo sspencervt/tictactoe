@@ -13,9 +13,26 @@ function promptPlayer() {
     
     process.stdin.once('data', (userInput) => {
     
-        let userValue = userInput.toString().trim();
+        let userValue = parseInt(userInput.toString().trim());
 
         let userIndex = userValue - 1
+        console.log(userValue)
+
+        //validation against user not putting in 1-9
+
+        if (game.board.indexOf(userValue) === -1) {
+            console.log('Please pick a number between 1-9')
+            return promptPlayer()
+        }
+
+        //validation against a user trying to use a space thats already been occupied
+
+        if (game.board[userIndex] === 'X' || game.board[userIndex] === 'O') {
+            console.log('Someone has already played this space, please choose another.')
+            return promptPlayer()
+        }
+
+        //
 
         game.board[userIndex] = game.currentPlayer
         game.turnCount++
@@ -26,6 +43,8 @@ function promptPlayer() {
         else {
             game.currentPlayer = "X"
         }
+
+    
 
         // console.log('userValue: ' + userValue)
         // console.log('currentPlayer: ' + game.currentPlayer)
