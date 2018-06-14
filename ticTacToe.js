@@ -7,6 +7,13 @@ let game = {
     currentPlayer: 'X'
 }
 
+// function playerName() {
+//     console.log('Enter player X name')
+//     process.stdin.once('data', (userInput) => {
+//         let userName = userInput.string().trim()
+//     }
+// }
+
 function promptPlayer() {
     
     console.log('Player ' + game.currentPlayer + ' choose a position')
@@ -86,6 +93,48 @@ function detectWinState(board, currentPlayer){
     if (board[0] === currentPlayer && board[1] === currentPlayer && board[2] === currentPlayer){
         return true
     }
+
+    if (board[3] === currentPlayer && board[4] === currentPlayer && board[5] === currentPlayer){
+        return true
+    }
+
+    if (board[6] === currentPlayer && board[7] === currentPlayer && board[8] === currentPlayer){
+        return true
+    }
+
+    if (board[0] === currentPlayer && board[3] === currentPlayer && board[6] === currentPlayer){
+        return true
+    }
+
+    if (board[1] === currentPlayer && board[4] === currentPlayer && board[7] === currentPlayer){
+        return true
+    }
+
+    if (board[2] === currentPlayer && board[5] === currentPlayer && board[8] === currentPlayer){
+        return true
+    }
+
+    if (board[0] === currentPlayer && board[4] === currentPlayer && board[8] === currentPlayer){
+        return true
+    }
+
+    if (board[2] === currentPlayer && board[4] === currentPlayer && board[6] === currentPlayer){
+        return true
+    }
+
+    //board[3], board[4], board[5]
+
+    //board[6], board[7], board[8]
+
+    //board[0], board[3], board[6]
+
+    //board[1], board[4], board[7]
+
+    //board[2], board[5], board[8]
+
+    //board[0], board[4], board[8]
+
+    //board[2], board[4], board[6]
 
     return false
 
